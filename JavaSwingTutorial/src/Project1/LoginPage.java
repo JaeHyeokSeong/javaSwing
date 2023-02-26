@@ -2,8 +2,14 @@ package Project1;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LoginPage extends JFrame {
+
+    private JTextField idTextField;
+    private JPasswordField passwordTextField;
+    private JButton loginButton, clearButton;
 
     public LoginPage() {
         super("Login");
@@ -23,11 +29,17 @@ public class LoginPage extends JFrame {
         }
 
         menus[0].add(new JLabel("ID "));
-        menus[1].add(new JTextField(10));
+        menus[1].add(idTextField = new JTextField(10));
         menus[2].add(new JLabel("PWD "));
-        menus[3].add(new JTextField(10));
-        menus[4].add(new JButton("Login"));
-        menus[5].add(new JButton("Clear"));
+        menus[3].add(passwordTextField = new JPasswordField(10));
+
+        // add events to login and clear buttons
+        loginButton = new JButton("Login");
+        clearButton = new JButton("Clear");
+        loginButton.addActionListener(new EventHandler());
+        clearButton.addActionListener(new EventHandler());
+        menus[4].add(loginButton);
+        menus[5].add(clearButton);
 
         for(int i = 0; i < 6; i++) {
             mainPanel.add(menus[i]);
@@ -36,5 +48,26 @@ public class LoginPage extends JFrame {
         add(mainPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+    }
+
+    class EventHandler implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource() == loginButton) {
+                // sample id = "1234" and password = "1234"
+                if(idTextField.getText().equals("1234") && new String(passwordTextField.getPassword()).equals("1234")) {
+                    System.out.println("login success");
+                }
+                else {
+                    System.out.println("login fail");
+                    JOptionPane.showMessageDialog(null, "Login fail", "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            else if(e.getSource() == clearButton) {
+                idTextField.setText("");
+                passwordTextField.setText("");
+            }
+        }
     }
 }
