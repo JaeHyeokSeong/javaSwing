@@ -58,6 +58,8 @@ public class LoginPage extends JFrame {
                 // sample id = "1234" and password = "1234"
                 if(idTextField.getText().equals("1234") && new String(passwordTextField.getPassword()).equals("1234")) {
                     System.out.println("login success");
+                    // open new page
+                    new WorkingPage();
                 }
                 else {
                     System.out.println("login fail");
