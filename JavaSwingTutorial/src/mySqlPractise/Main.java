@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("hello world");
         createTable();
-        createCustomer("Bro", "010-1234-0000", "Male", "1", "no notes");
+        createCustomer("Test User", "010-1234-0000", "Male", "1", "no notes");
         ArrayList<String> customersData = getCustomer();
         for(String customerData : customersData) {
             System.out.println(customerData);
