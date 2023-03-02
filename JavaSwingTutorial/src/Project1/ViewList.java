@@ -1,8 +1,10 @@
 package Project1;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class ViewList extends JFrame {
@@ -66,9 +68,47 @@ public class ViewList extends JFrame {
             }
         };
         jt.setModel(tableModel);
+
+        // resize table column
+        TableColumnModel tc = jt.getColumnModel();
+        tc.getColumn(0).setPreferredWidth(10);
+        tc.getColumn(1).setPreferredWidth(5);
+        tc.getColumn(2).setPreferredWidth(5);
+
+
         JScrollPane jsp = new JScrollPane(jt);
-        jsp.setLocation(10, 10);
+        jsp.setLocation(10, 50);
         jsp.setSize(780, 300);
         add(jsp);
+
+        JLabel searchLabel = new JLabel("Search");
+        searchLabel.setLocation(100, 22);
+        searchLabel.setSize(100, 15);
+        add(searchLabel);
+
+        JTextField searchTextField = new JTextField();
+        searchTextField.setLocation(150, 20);;
+        searchTextField.setSize(500, 20);
+        // add key event
+        searchTextField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String val = searchTextField.getText();
+                TableRowSorter<TableModel> trs = new TableRowSorter<TableModel>(jt.getModel());
+                jt.setRowSorter(trs);
+                trs.setRowFilter(RowFilter.regexFilter(val));
+            }
+        });
+        add(searchTextField);
     }
 }
