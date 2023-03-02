@@ -23,9 +23,9 @@ public class Main {
         Connection connection = null;
         try {
             String driver = "com.mysql.cj.jdbc.Driver";
-            String url = "jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12602212";
-            String user = "sql12602212";
-            String password = "w4KEXsZupP";
+            String url = "jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12602277";
+            String user = "sql12602277";
+            String password = "f1GLRuRse2";
             Class.forName(driver);
             connection = DriverManager.getConnection(url, user, password);
             System.out.println("sql 연결이 되었습니다.");
@@ -78,13 +78,16 @@ public class Main {
         ArrayList<String> customerData = null;
         try {
             Connection connection = getConnection();
-            PreparedStatement statement = connection.prepareStatement("Select name, phone, gender FROM Customer");
+            PreparedStatement statement = connection.prepareStatement("Select * FROM Customer");
             ResultSet resultSet = statement.executeQuery();
             customerData = new ArrayList<String>();
             while(resultSet.next()) {
-                customerData.add("name: " + resultSet.getString("name") +
-                        ", phone: " + resultSet.getString("phone") +
-                        ", gender: " + resultSet.getString("gender"));
+                customerData.add(resultSet.getString("name") +
+                        "," + resultSet.getString("age") +
+                        "," + resultSet.getString("gender") +
+                        "," + resultSet.getString("phoneNumber") +
+                        "," + resultSet.getString("birthday") +
+                        "," + resultSet.getString("note"));
             }
             System.out.println("Customer database 에서 값을 불러오는데 있어서 성공하였습니다.");
         } catch (Exception e) {

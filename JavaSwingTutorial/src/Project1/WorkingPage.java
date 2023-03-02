@@ -130,6 +130,13 @@ public class WorkingPage extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // if form is not fully filled
+                if(nameTextField.getText().equals("") || phoneTextField.getText().equals("") ||
+                birthdayTextField.getText().equals("") || noteTextArea.getText().equals("")) {
+                    System.out.println("[warning] please fill a form");
+                    JOptionPane.showMessageDialog(null, "please fill a form", "warning", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 String[] userInformation = new String[] {
                     nameTextField.getText(), ageTextField.getText(),
                         genderComboBox.getSelectedItem().toString(),
@@ -156,12 +163,23 @@ public class WorkingPage extends JFrame {
                 nameTextField.setText("");
                 ageTextField.setText("");
                 phoneTextField.setText("");
-                birthdayLabel.setText("");
+                birthdayTextField.setText("");
                 noteTextArea.setText("");
             }
         });
         submitButton.setSize(200, 50);
         submitButton.setLocation(300, 350);
+
+        JButton viewListButton = new JButton("view list");
+        viewListButton.setSize(200, 50);
+        viewListButton.setLocation(100, 350);
+
+        viewListButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ViewList vl = new ViewList();
+            }
+        });
 
         add(nameLabel);
         add(ageLabel);
@@ -178,5 +196,6 @@ public class WorkingPage extends JFrame {
         add(jp);
 
         add(submitButton);
+        add(viewListButton);
     }
 }
