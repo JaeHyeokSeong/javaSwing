@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static mySqlPractise.Main.createCustomer;
+import static mySqlPractise.Main.createTable;
 
 public class WorkingPage extends JFrame {
 
@@ -139,6 +141,23 @@ public class WorkingPage extends JFrame {
                 for(String txt : userInformation) {
                     System.out.println(txt);
                 }
+                // save entered values into sql server
+                mySqlPractise.Main.createTable();
+                boolean created = mySqlPractise.Main.createCustomer(nameTextField.getText(), ageTextField.getText(),
+                        genderComboBox.getSelectedItem().toString(), phoneTextField.getText(),
+                        birthdayTextField.getText(), noteTextArea.getText());
+
+                if(created) {
+                    JOptionPane.showMessageDialog(null, "submitted", "information", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "fail", "warning", JOptionPane.WARNING_MESSAGE);
+                }
+                // clear entered values
+                nameTextField.setText("");
+                ageTextField.setText("");
+                phoneTextField.setText("");
+                birthdayLabel.setText("");
+                noteTextArea.setText("");
             }
         });
         submitButton.setSize(200, 50);
